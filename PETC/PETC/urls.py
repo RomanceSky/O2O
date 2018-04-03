@@ -24,11 +24,21 @@ from PETC.settings import MEDIA_ROOT
 
 import xadmin
 
+#: rest_framework方式实现api
+#from rest_framework.documentation import include _docs_urls
+from rest_framework.documentation import include_docs_urls
+
+from goods.views import GoodsListView
+
 urlpatterns = [
 #    path('admin/', admin.site.urls),
     path('xadmin/', xadmin.site.urls),
     path(r'^ueditor/',include('DjangoUeditor.urls' )),
     #: 配置上传文件的访问处理函数
     path('media/<path:path>',serve,{'document_root':MEDIA_ROOT}),
-
+  
+    #:
+    path('docs', include_docs_urls(title='意艺品')),
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    path('goods', GoodsListView.as_view(), name="goods-list"),
 ]
