@@ -66,6 +66,8 @@ INSTALLED_APPS = [
     'reversion',
     
     'rest_framework',
+    'django_filters',
+
 ]
 
 MIDDLEWARE = [
@@ -154,4 +156,16 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 MEDIA_URL="/media/"
 MEDIA_ROOT=os.path.join(BASE_DIR,"media")
+
+#: 自定义过滤器
+REST_FRAMEWORK = {
+    #: 分页显示
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'PAGE_SIZE': 10,
+    #: 配置过滤
+    'DEFAULT_FILTER_BACKENDS':
+('django_filters.rest_framework.DjangoFilterBackend',)
+}
+
+
 

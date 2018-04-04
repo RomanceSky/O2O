@@ -29,6 +29,12 @@ import xadmin
 from rest_framework.documentation import include_docs_urls
 
 from goods.views import GoodsListView
+#:分页最重要的viewsets和router（路由器）来实现商品列表页
+from rest_framework.routers import DefaultRouter
+from goods.views import GoodsListViewSet
+
+router = DefaultRouter()
+router.register(r'goods', GoodsListViewSet)
 
 urlpatterns = [
 #    path('admin/', admin.site.urls),
@@ -40,5 +46,6 @@ urlpatterns = [
     #:
     path('docs', include_docs_urls(title='意艺品')),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    path('goods', GoodsListView.as_view(), name="goods-list"),
+    #path('goods', GoodsListView.as_view(), name="goods-list"),
+    path('', include(router.urls))
 ]
