@@ -33,6 +33,11 @@ from goods.views import GoodsListView
 from rest_framework.routers import DefaultRouter
 from goods.views import GoodsListViewSet
 
+#:将创建一个读/写API，来处理我们项目中的用户信息
+
+
+
+
 router = DefaultRouter()
 router.register(r'goods', GoodsListViewSet)
 

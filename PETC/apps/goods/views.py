@@ -2,7 +2,7 @@ from django.shortcuts import render
 
 # Create your views here.
 #: 使用Django的REST_framework来写
-from .serializer import GoodsSerializer
+from .serializer import GoodsSerializer, CategorySerializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
@@ -19,6 +19,8 @@ from rest_framework import viewsets
 #:自定义过滤器
 from django_filters.rest_framework import DjangoFilterBackend
 from .filter import GoodsFilter
+from rest_framework import filters
+
 
 
 #: 配置分页规则
@@ -26,16 +28,16 @@ class GoodsPagination(PageNumberPagination):
     page_size = 10
     page_size_query_param = 'page_size'
     page_query_param = "p"
-    max_page_size = 1000
+    max_page_size = 100
 
-
+"""
 class GoodsListViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
     queryset = Goods.objects.all()
     serializer_class = GoodsSerializer
     pagination_class = GoodsPagination
     filter_backends = (DjangoFilterBackend,)
     filter_class = GoodsFilter
-
+"""
 
 class GoodsListView(generics.ListAPIView):
     queryset = Goods.objects.all()[:10]
@@ -43,17 +45,21 @@ class GoodsListView(generics.ListAPIView):
 
     
 
-"""
 #: 商品列表
 class GoodsListViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
     queryset = Goods.objects.get_queryset().order_by('id')
     serializer_class = GoodsSerializer
     pagination_class = GoodsPagination
-
+    filter_backends = (filters.SearchFilter,)
+    search_fields = ('username', 'email')     
+#    filter_backends = (DjangoFilterBackend,)
+ #   filter_class=GoodsFilter
     #: 过滤
     def get_queryset(self):
         return Goods.objects.filter(shop_price__gt=100)
-"""
+    
+
+
 #class GoodsListView(APIView):
 #   def get(self, request, format=None):
 #        goods = Goods.objects.all()[:10]

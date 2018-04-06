@@ -4,6 +4,14 @@ from django.db import models
 from datetime import datetime
 from django.contrib.auth import get_user_model
 from goods.models import Goods
+#from apps.goods.models import Goods
+
+
+#from users.models import  UserProfile
+#import sys
+#sys.path.append("../..")
+#from apps.goods.models import Goods
+
 User = get_user_model()
 
 """

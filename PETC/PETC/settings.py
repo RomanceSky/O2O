@@ -51,10 +51,7 @@ INSTALLED_APPS = [
     'PETC',
     'ETC',
     'houtai',
-    #'users',
-    #'goods',
-    #'trade',
-    #'user_operation',
+    'snippets',   
     'users.apps.UsersConfig',
     'goods.apps.GoodsConfig',
     'trade.apps.TradeConfig',
@@ -67,6 +64,7 @@ INSTALLED_APPS = [
     
     'rest_framework',
     'django_filters',
+    
 
 ]
 
@@ -85,7 +83,8 @@ ROOT_URLCONF = 'PETC.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+#        'DIRS': [],
+        'DIRS': ['my-vue-app/dist'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -156,6 +155,10 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 MEDIA_URL="/media/"
 MEDIA_ROOT=os.path.join(BASE_DIR,"media")
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "my-vue-app/dist/static"),
+]
 
 #: 自定义过滤器
 REST_FRAMEWORK = {
