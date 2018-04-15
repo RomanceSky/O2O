@@ -9,6 +9,7 @@ from rest_framework.response import Response
 
 from .models import Goods
 
+from goods.models import Goods
 #: 使用mixins让代码变得更简洁
 from rest_framework import mixins
 from rest_framework import generics
@@ -30,21 +31,20 @@ class GoodsPagination(PageNumberPagination):
     page_query_param = "p"
     max_page_size = 100
 
-"""
+
 class GoodsListViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
     queryset = Goods.objects.all()
     serializer_class = GoodsSerializer
     pagination_class = GoodsPagination
     filter_backends = (DjangoFilterBackend,)
     filter_class = GoodsFilter
-"""
 
 class GoodsListView(generics.ListAPIView):
     queryset = Goods.objects.all()[:10]
     serializer_class = GoodsSerializer
 
     
-
+"""
 #: 商品列表
 class GoodsListViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
     queryset = Goods.objects.get_queryset().order_by('id')
@@ -58,7 +58,7 @@ class GoodsListViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
     def get_queryset(self):
         return Goods.objects.filter(shop_price__gt=100)
     
-
+"""
 
 #class GoodsListView(APIView):
 #   def get(self, request, format=None):

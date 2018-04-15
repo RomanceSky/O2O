@@ -6,8 +6,17 @@
 </template>
 
 <script>
+// 导入组件
+import HelloWorld from './components/HelloWorld'
+
+
+
 export default {
-  name: 'App'
+  name: 'App',
+  components:{
+    HelloWorld
+  }
+
 }
 </script>
 

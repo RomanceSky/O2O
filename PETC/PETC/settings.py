@@ -35,6 +35,9 @@ DEBUG = True
 ALLOWED_HOSTS = ['*']
 
 
+#:跨域问题
+CORS_ORIGIN_ALLOW_ALL = True
+
 #: 插入设置新用户表的设置代码
 AUTH_USER_MODEL = 'users.UserProfile'
 
@@ -47,13 +50,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'coreschema',
+
 #    'django.contrib.sites',#添加这一行
     'PETC',
     'ETC',
     'houtai',
     'snippets',   
     'users.apps.UsersConfig',
-    'goods.apps.GoodsConfig',
+    'apps.goods.apps.GoodsConfig',
     'trade.apps.TradeConfig',
     'user_operation.apps.UserOperationConfig', #注意这条的写法
 
@@ -69,6 +74,8 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
+
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',

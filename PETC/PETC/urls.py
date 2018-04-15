@@ -32,14 +32,21 @@ from goods.views import GoodsListView
 #:分页最重要的viewsets和router（路由器）来实现商品列表页
 from rest_framework.routers import DefaultRouter
 from goods.views import GoodsListViewSet
+#from PETC.settings import MEDIA_ROOT
 
 #:将创建一个读/写API，来处理我们项目中的用户信息
 
-
-
-
+from ETC.api import views
+from ETC.api.views import *
+from django.conf.urls import include
+from rest_framework import routers
 router = DefaultRouter()
 router.register(r'goods', GoodsListViewSet)
+
+#router.register(r'categorys', CategoryViewSet, base_name="categorys")
+
+router = routers.DefaultRouter(trailing_slash=True)
+#router.register(r'', UploadImageViewSet, base_name='UploadFile')
 
 urlpatterns = [
 #    path('admin/', admin.site.urls),
@@ -51,6 +58,7 @@ urlpatterns = [
     #:
     path('docs', include_docs_urls(title='意艺品')),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    #path('goods', GoodsListView.as_view(), name="goods-list"),
-    path('', include(router.urls))
+    path('goods', GoodsListView.as_view(), name="goods-list"),
+    path('', include(router.urls)),
+ #   path(r'^snippets/$', include('snippets.api.urls', namespace='snippets')),
 ]
